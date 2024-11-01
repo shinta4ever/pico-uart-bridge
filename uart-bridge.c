@@ -23,6 +23,10 @@
 #define DEF_STOP_BITS 1
 #define DEF_PARITY 0
 #define DEF_DATA_BITS 8
+#define UART0_TX_PIN 0
+#define UART0_RX_PIN 1
+#define UART1_TX_PIN 4
+#define UART1_RX_PIN 5
 
 typedef struct {
 	uart_inst_t *const inst;
@@ -52,14 +56,14 @@ const uart_id_t UART_ID[CFG_TUD_CDC] = {
 		.inst = uart0,
 		.irq = UART0_IRQ,
 		.irq_fn = &uart0_irq_fn,
-		.tx_pin = 16,
-		.rx_pin = 17,
+		.tx_pin = UART0_TX_PIN,
+		.rx_pin = UART0_RX_PIN,
 	}, {
 		.inst = uart1,
 		.irq = UART1_IRQ,
 		.irq_fn = &uart1_irq_fn,
-		.tx_pin = 4,
-		.rx_pin = 5,
+		.tx_pin = UART1_TX_PIN,
+		.rx_pin = UART1_RX_PIN,
 	}
 };
 
@@ -299,6 +303,8 @@ void init_uart_data(uint8_t itf)
 
 int main(void)
 {
+    // stdio_init_all();
+
 	int itf;
 
 	usbd_serial_init();
